@@ -28,7 +28,20 @@ class FamilyStructure:
         # fill this method and update the return
         pass
 
-    def get_member(self, id):
+    def get_member(self, url_id):
+        members_list = self._members 
+        for member_dictionary in members_list :
+            member_id = member_dictionary["id"]
+            if url_id == member_id:
+                return member_dictionary
+            
+
+
+        # my_list = [1, 2, 3, 4, 5]
+        # for item in my_list:
+        # print(item)
+        
+        
         # fill this method and update the return
         pass
 
