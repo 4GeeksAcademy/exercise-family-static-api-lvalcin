@@ -67,24 +67,17 @@ def add_member():
     # members = jackson_family.add_member(body)
     print(body, "Here is the BODYYYYY!!!!!!")
     return jsonify({"msg":"Member added succesfully"}), 200
-# POST /member
-# REQUEST BODY (content_type: application/json):
-# {
-#     id: Int,
-#     first_name: String,
-#     age: Int,
-#     lucky_numbers: []
-# }
-# RESPONSE (content_type: application/json):
-# status_code: 200 if success. 400 if a bad request (wrong info). 500 if the server encounters an error
+
 
 @app.route('/member/<int:id>', methods=['DELETE'])
 def delete_member(id):
     delete = jackson_family.delete_member(id)
     if delete:
-        return jsonify({"message": f"Member with id {id} deleted successfully"}), 200
-    else:
-        return jsonify({"error": f"Member with id {id} not found"}), 404
+        body= {
+         "done": True
+            } 
+        return jsonify(body), 200
+
 
 
 

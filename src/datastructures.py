@@ -15,20 +15,20 @@ class FamilyStructure:
         # example list of members
         self._members = [
             {
+                "name": "John",
                 "id": 1,
-                "first_name": "John",
                 "age": 33,
                 "lucky_numbers": [7, 13, 22]
             },
             {
+                "name": "Jane",
                 "id": 2,
-                "first_name": "Jane",
                 "age": 35,
                 "lucky_numbers": [10, 14, 3]
             },
             {
+                "name": "Jimmy",
                 "id": 3,
-                "first_name": "Jimmy",
                 "age": 5,
                 "lucky_numbers": [1]
             }
@@ -48,7 +48,7 @@ class FamilyStructure:
     def delete_member(self, id):
         for member in self._members:
             if member["id"]==id:
-                self._members.pop(member)
+                self._members.remove(member)
         # fill this method and update the return
         pass
 
@@ -57,14 +57,9 @@ class FamilyStructure:
         for member_dictionary in members_list :
             member_id = member_dictionary["id"]
             if url_id == member_id:
-                return member_dictionary
-    
+                return member_dictionary   
 
-        # my_list = [1, 2, 3, 4, 5]
-        # for item in my_list:
-        # print(item)
-
-
+     
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
         return self._members
