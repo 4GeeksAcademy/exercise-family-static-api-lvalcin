@@ -26,40 +26,66 @@ def sitemap():
     return generate_sitemap(app)
 
 @app.route('/members', methods=['GET'])
-def handle_hello():
+def get_all_members():
 
     # this is how you can use the Family datastructure by calling its methods
     members = jackson_family.get_all_members()
-    response_body = {
-        "hello": "world",
-        "family": members
-    }
+    # response_body = {
+    #     "hello": "world",
+    #     "family": members
+    # }
 
-
-    return jsonify(response_body), 200
+    return jsonify(members), 200
 
 # GET /member/<int:member_id>
 
-@app.route('/member/<int:member_id>', methods=['GET'])
-def get_member(member_id):
+@app.route('/member/<int:id>', methods=['GET'])
+def get_member(id):
 
     # this is how you can use the Family datastructure by calling its methods
-    members = jackson_family.get_member(member_id)
-    response_body = {
-        "hello": "world",
-        "family": members
-    }
-    return jsonify(members,"Single member added succesfully"), 200
+    member = jackson_family.get_member(id)
+    if member:
+        response_body = {
+            "name": member["first_name"],
+            "id": member["id"],
+            "age": member["age"],
+            "lucky_numbers":["lucky_members"]
+        }
+        return jsonify(response_body), 200
+    else:
+        return jsonify({"error": "Member not found"}), 404
+
+    # return jsonify({"msg":"Single member added succesfully"}), 200
 
 
-@app.route('/members', methods=['POST'])
+@app.route('/member', methods=['POST'])
 def add_member():
     body = request.json 
-    members = jackson_family.add_member(body)
-    print(body, "Here is the BODYYYYY!!!!!!")
-   
+    if not body:
+        return jsonify({"error": "Missing request body"}), 400
     
-    return jsonify("Member added succesfully"), 200
+    # members = jackson_family.add_member(body)
+    print(body, "Here is the BODYYYYY!!!!!!")
+    return jsonify({"msg":"Member added succesfully"}), 200
+# POST /member
+# REQUEST BODY (content_type: application/json):
+# {
+#     id: Int,
+#     first_name: String,
+#     age: Int,
+#     lucky_numbers: []
+# }
+# RESPONSE (content_type: application/json):
+# status_code: 200 if success. 400 if a bad request (wrong info). 500 if the server encounters an error
+
+@app.route('/member/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    delete = jackson_family.delete_member(id)
+    if delete:
+        return jsonify({"message": f"Member with id {id} deleted successfully"}), 200
+    else:
+        return jsonify({"error": f"Member with id {id} not found"}), 404
+
 
 
 
