@@ -30,32 +30,24 @@ def get_all_members():
 
     # this is how you can use the Family datastructure by calling its methods
     members = jackson_family.get_all_members()
-    # response_body = {
-    #     "hello": "world",
-    #     "family": members
-    # }
-
     return jsonify(members), 200
 
 # GET /member/<int:member_id>
 
 @app.route('/member/<int:id>', methods=['GET'])
 def get_member(id):
-
     # this is how you can use the Family datastructure by calling its methods
     member = jackson_family.get_member(id)
     if member:
-        response_body = {
-            "name": member["first_name"],
-            "id": member["id"],
-            "age": member["age"],
-            "lucky_numbers":["lucky_members"]
-        }
-        return jsonify(response_body), 200
+        # response_body = {
+        #     "name": member["first_name"],
+        #     "id": member["id"],
+        #     "age": member["age"],
+        #     "lucky_numbers":["lucky_members"]
+        # }
+        return jsonify(member), 200
     else:
         return jsonify({"error": "Member not found"}), 404
-
-    # return jsonify({"msg":"Single member added succesfully"}), 200
 
 
 @app.route('/member', methods=['POST'])
@@ -73,10 +65,10 @@ def add_member():
 def delete_member(id):
     delete = jackson_family.delete_member(id)
     if delete:
-        body= {
-         "done": True
-            } 
-        return jsonify(body), 200
+        # body= {
+        #  "done": True
+        #     } 
+        return jsonify({"done": True}), 200
 
 
 
