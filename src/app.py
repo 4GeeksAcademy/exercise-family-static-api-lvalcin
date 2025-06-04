@@ -64,7 +64,7 @@ def add_member():
     if not body:
         return jsonify({"error": "Missing request body"}), 400
     
-    # members = jackson_family.add_member(body)
+    jackson_family.add_member(body)
     print(body, "Here is the BODYYYYY!!!!!!")
     return jsonify({"msg":"Member added succesfully"}), 200
 
